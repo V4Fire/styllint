@@ -1,6 +1,6 @@
 {
   "name": "stlint-v4fire",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "V4Fire Rules for V4Fire",
   "main": "index.js",
   "scripts": {
