@@ -70,7 +70,6 @@
           "clear",
 
           "visibility",
-          "opacity",
 
           "margin",
           "margin-top",
@@ -167,10 +166,11 @@
           "border-bottom-right-image",
           "border-bottom-left-image",
 
+          "opacity",
           "color",
 
-          "background",
           "filter",
+          "background",
           "background-color",
           "background-image",
           "background-attachment",
