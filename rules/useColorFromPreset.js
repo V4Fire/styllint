@@ -17,7 +17,7 @@ function useColorFromPreset() {
 				const test = colors[j];
 
 				if (test === color) {
-					return `c(${keys[i]}, ${j})`
+					return j !== 0 ? `c(${keys[i]}, ${j})` : `c(${keys[i]})`;
 				}
 			}
 		}
@@ -51,32 +51,33 @@ function useColorFromPreset() {
 	};
 
 	const loadColors = () => {
-		const pzlrPath = path.resolve(this.config.basepath, '.pzlrrc');
+		try {
+			const pzlrPath = path.resolve(this.config.basepath, '.pzlrrc');
 
-		if (!fs.existsSync(pzlrPath)) {
-			return;
-		}
-
-		const pzlr = JSON.parse(fs.readFileSync(pzlrPath, 'utf8'));
-
-		if (!pzlr || !pzlr.dependencies || !Array.isArray(pzlr.dependencies)) {
-			return;
-		}
-
-		pzlr.dependencies.forEach((pack) => {
-			const colorIndex = path.resolve(this.config.basepath, 'node_modules', pack, 'src/global/g-def/colors/index.styl');
-			if (!fs.existsSync(colorIndex)) {
+			if (!fs.existsSync(pzlrPath)) {
 				return;
 			}
 
-			const str = fs.readFileSync(colorIndex, 'utf8');
-			const content = new Content(str);
+			const pzlr = JSON.parse(fs.readFileSync(pzlrPath, 'utf8'));
 
-			const parser = new StylusParser(this.config.stylusParserOptions);
-			const ast = parser.parse(content);
-			visitor(ast);
+			if (!pzlr || !pzlr.designSystem) {
+				return;
+			}
 
-		});
+			const designSystemFile = path.resolve(this.config.basepath, 'node_modules', pzlr.designSystem, 'index.js');
+			if (!fs.existsSync(designSystemFile)) {
+				return;
+			}
+
+			const designSystem = JSON.parse(fs.readFileSync(designSystemFile, 'utf8'));
+			if (designSystem && designSystem.colors) {
+				this.context.colors = designSystem.colors;
+			}
+
+		} catch(e) {
+			console.log(e);
+			return;
+		}
 	};
 
 	this.checkNode = (node) => {
