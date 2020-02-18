@@ -1,12 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-const  { Content, StylusParser } = require('stlint');
-const  { Call, Ident, RGB } = require('stlint').ast;
 
 function useColorFromPreset() {
 	this.nodesFilter = ['call'];
-
-	const vars = [];
 
 	const getKeyForColor = (color) => {
 		const keys = Object.keys(this.context.colors);
@@ -23,31 +19,6 @@ function useColorFromPreset() {
 		}
 
 		return null;
-	};
-
-	const visitor = (node) => {
-		if (node instanceof Ident && /^\$/.test(node.key)) {
-			vars[node.key] = node.value.toString().split(/\s/);
-		}
-
-		if (node instanceof Call && node.key === 'registerColors') {
-			const colors = JSON.parse(node.nodes[0].toString());
-
-			Object.keys(colors).forEach((key) => {
-				this.context.colors[key] = colors[key].replace(/^\(/, '').replace(/\)$/, '').split(/\s/);
-
-				if (this.context.colors[key][0] && /^\$/.test(this.context.colors[key][0])) {
-					const value = vars[this.context.colors[key][0]];
-					this.context.colors[key] = value;
-				}
-			});
-
-			return;
-		}
-
-		if (node.nodes) {
-			node.nodes.forEach(visitor);
-		}
 	};
 
 	const loadColors = () => {
@@ -70,13 +41,13 @@ function useColorFromPreset() {
 			}
 
 			const designSystem = JSON.parse(fs.readFileSync(designSystemFile, 'utf8'));
+
 			if (designSystem && designSystem.colors) {
 				this.context.colors = designSystem.colors;
 			}
 
 		} catch(e) {
 			console.log(e);
-			return;
 		}
 	};
 
@@ -94,7 +65,7 @@ function useColorFromPreset() {
 		if (node && node.key.toLowerCase() === 'c') {
 			const
 				color = node.nodes[0].toString(),
-				replace = getKeyForColor(color);
+				replace = getKeyForColor(node.nodes[0]);
 
 			if (replace) {
 				this.msg(`Use instead raw color ${color} mixin ${replace}`,
