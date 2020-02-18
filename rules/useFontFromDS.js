@@ -39,7 +39,7 @@ function useFontFromDS() {
 
 		return parts.map((key) => {
 			if (/^[0-9]+$/.test(key)) {
-				return parseInt(key, 10);
+				return parseInt(key, 10) / 10;
 			}
 
 			if (weights[key]) {
