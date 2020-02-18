@@ -51,7 +51,7 @@ function useFontFromDS() {
 				replace = this.context.fonts[value.replace(/[^a-zA-Z0-9–]/g, '-')];
 
 			if (!replace) {
-				this.msg(`This text-name does not exists`,
+				this.msg(`This text-name does not exist`,
 					node.line.lineno,
 					node.column,
 					node.column + node.toString().length - 1,
