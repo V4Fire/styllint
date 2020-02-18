@@ -24,6 +24,7 @@
     "mocha": "^6.2.2"
   },
   "dependencies": {
+    "color-engine": "^1.0.4",
     "stlint": "^1.0.59",
     "stylus": "^0.54.7"
   },

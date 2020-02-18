@@ -1,10 +1,21 @@
 const path = require('path');
 const fs = require('fs');
+const ColorEngine = require('color-engine');
 
 function useColorFromPreset() {
 	this.nodesFilter = ['call'];
 
 	const getKeyForColor = (color) => {
+		if (this.context.colors[color]) {
+			return;
+		}
+
+		const rgb = new ColorEngine(color);
+		if (!rgb.isColor) {
+			return;
+		}
+
+
 		const keys = Object.keys(this.context.colors);
 
 		for (let i = 0; i < keys.length; i += 1) {
@@ -40,13 +51,13 @@ function useColorFromPreset() {
 				return;
 			}
 
-			const designSystem = JSON.parse(fs.readFileSync(designSystemFile, 'utf8'));
+			const designSystem = require(designSystemFile);
 
 			if (designSystem && designSystem.colors) {
 				this.context.colors = designSystem.colors;
 			}
 
-		} catch(e) {
+		} catch (e) {
 			console.log(e);
 		}
 	};
@@ -65,7 +76,7 @@ function useColorFromPreset() {
 		if (node && node.key.toLowerCase() === 'c') {
 			const
 				color = node.nodes[0].toString(),
-				replace = getKeyForColor(node.nodes[0]);
+				replace = getKeyForColor(color);
 
 			if (replace) {
 				this.msg(`Use instead raw color ${color} mixin ${replace}`,
