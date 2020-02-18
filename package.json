@@ -21,11 +21,11 @@
   "homepage": "https://github.com/V4Fire/stlint#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.2"
   },
   "dependencies": {
-    "stlint": "^1.0.57",
-    "stylus": "^0.54.5"
+    "stlint": "^1.0.59",
+    "stylus": "^0.54.7"
   },
   "mocha": {
     "require": [

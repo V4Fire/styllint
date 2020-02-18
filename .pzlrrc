@@ -2,6 +2,6 @@
   "projectType": "ts",
   "blockDir": "",
   "sourceDir": "src",
-  "dependencies": ["@edadeal/core", "@v4fire/client", "@v4fire/core"],
+  "dependencies": ["@v4fire/client", "@v4fire/core"],
   "assets": {"sprite": "sprite/${theme}"}
 }
