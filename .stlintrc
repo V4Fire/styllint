@@ -6,6 +6,7 @@
 
 		"useMixinInsteadUnit": false,
 		"useColorFromPreset": true,
+		"useFontFromDS": true,
 
 		"sortOrder": {
       "conf": "grouped",

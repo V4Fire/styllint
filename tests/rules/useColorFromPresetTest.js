@@ -22,8 +22,6 @@ describe('Test useColorFromPreset', () => {
 			rule
 		);
 
-		console.log(rule.errors);
-
 		expect(rule.errors.length).to.be.equal(1);
 	});
 });
