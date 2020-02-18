@@ -5,31 +5,49 @@ const parse = require('parse-color');
 function useColorFromPreset() {
 	this.nodesFilter = ['call'];
 
+	const distance = (color1, color2) => Math.sqrt(
+		color1.reduce((sum, value, index) => {
+			return Math.pow(value - color2[index], 2) + sum;
+		}, 0)
+	);
+
 	const getKeyForColor = (color) => {
 		if (this.context.colors[color]) {
 			return;
 		}
 
 		const rgb = parse(color).rgba;
+
 		if (!rgb) {
 			return;
 		}
 
-
 		const keys = Object.keys(this.context.colors);
+
+		let min = null;
 
 		for (let i = 0; i < keys.length; i += 1) {
 			const colors = this.context.colors[keys[i]];
+
 			for (let j = 0; j < colors.length; j += 1) {
 				const test = colors[j];
 
-				if (test === color) {
-					return j !== 0 ? `c(${keys[i]}, ${j})` : `c(${keys[i]})`;
+				if (!min) {
+					min = {
+						key: keys[i],
+						j
+					};
+				} else if (distance(test, rgb) < distance(rgb, this.context.colors[min.key][min.j])) {
+					min = {
+						key: keys[i], j
+					};
 				}
 			}
 		}
 
-		return null;
+
+
+		return min.j !== 0 ? `c(${min.key}, ${min.j})` : `c(${min.key})`;
 	};
 
 	const loadColors = () => {
@@ -54,7 +72,7 @@ function useColorFromPreset() {
 			const designSystem = require(designSystemFile);
 
 			if (designSystem && designSystem.colors) {
-				this.context.colors = Object.keys(designSystem.colors).reduce((obj, key) => {
+				Object.keys(designSystem.colors).reduce((obj, key) => {
 					const value = designSystem.colors[key];
 
 					obj[key] = (Array.isArray(value) ? value : [value]).map((clr) => {
@@ -62,10 +80,7 @@ function useColorFromPreset() {
 					});
 
 					return obj;
-				}, {});
-
-				console.log(this.context.colors);
-
+				}, this.context.colors);
 			}
 
 		} catch (e) {
