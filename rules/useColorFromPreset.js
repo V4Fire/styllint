@@ -45,7 +45,9 @@ function useColorFromPreset() {
 			}
 		}
 
-
+		if (!min) {
+			return null;
+		}
 
 		return min.j !== 0 ? `c(${min.key}, ${min.j})` : `c(${min.key})`;
 	};
