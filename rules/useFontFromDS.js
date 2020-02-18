@@ -7,7 +7,7 @@ const distance = (point1, point2) => {
 			return Math.pow(value - point2[index], 2) + sum;
 		}, 0)
 	);
-}
+};
 
 function useFontFromDS() {
 	this.nodesFilter = ['call'];
@@ -51,7 +51,7 @@ function useFontFromDS() {
 	const toKey = (key) => key.replace(/[^a-zA-Z0-9–]/g, '-');
 	const fromKey = (key) => key
 		.replace(/[^a-zA-Z0-9–]/g, ' ')
-		.replace(/^([a-zA-Z]+)\s([MLXS]+)/g, '$1/$2')
+		.replace(/^([a-zA-Z]+)\s([MLXS]+)/g, '$1/$2');
 
 	const getReplaceFor = (key) => {
 		if (this.context.fonts[key]) {
@@ -139,7 +139,7 @@ function useFontFromDS() {
 				replace = getReplaceFor(rvalue);
 
 			if (replace) {
-				this.msg(`This text-name does not exists. Use ${replace} instead`,
+				this.msg(`This text-name does not exist. Use ${replace} instead`,
 					node.line.lineno,
 					node.column,
 					node.column + node.toString().length + 1,
