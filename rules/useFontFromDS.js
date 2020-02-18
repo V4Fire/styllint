@@ -31,6 +31,8 @@ function useFontFromDS() {
 	const calcWeights = (key) => {
 		const parts = key
 			.toLowerCase()
+			.replace(/^[-]+/, '')
+			.replace(/[-]+$/, '')
 			.replace(/[^a-zA-Z0-9\-]/g, '')
 			.replace(/[\-]{2,}/g, '-')
 			.split(/-/);
@@ -48,7 +50,9 @@ function useFontFromDS() {
 		});
 	};
 
-	const toKey = (key) => key.replace(/[^a-zA-Z0-9–]/g, '-');
+	const toKey = (key) => key
+		.replace(/[^a-zA-Z0-9–]/g, '-');
+
 	const fromKey = (key) => key
 		.replace(/[^a-zA-Z0-9–]/g, ' ')
 		.replace(/^([a-zA-Z]+)\s([MLXS]+)/g, '$1/$2');
