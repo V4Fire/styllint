@@ -3,5 +3,6 @@
   "blockDir": "",
   "sourceDir": "src",
   "dependencies": ["@v4fire/client", "@v4fire/core"],
+  "designSystem": "@v4fire/design-system",
   "assets": {"sprite": "sprite/${theme}"}
 }
