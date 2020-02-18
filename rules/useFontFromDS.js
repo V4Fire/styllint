@@ -48,7 +48,7 @@ function useFontFromDS() {
 		if (node && node.key.toLowerCase() === 't') {
 			const
 				value = node.nodes[0].toString(),
-				replace = this.context.fonts[value];
+				replace = this.context.fonts[value.replace(/[^a-zA-Z0-9–]/g, '-')];
 
 			if (!replace) {
 				this.msg(`This text-name does not exists`,
