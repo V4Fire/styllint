@@ -4,7 +4,13 @@
     "testRule": false,
 		"allowColorOnlyInC": true,
 
-		"useMixinInsteadUnit": false,
+		"useMixinInsteadUnit": {
+			"conf": "never",
+			"mixin": "basis",
+			"unitType": "px",
+			"allowOneUnit": false
+		},
+
 		"useColorFromPreset": true,
 
 		"sortOrder": {
