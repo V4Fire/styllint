@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const ColorEngine = require('color-engine');
+const parse = require('parse-color');
 
 function useColorFromPreset() {
 	this.nodesFilter = ['call'];
@@ -10,8 +10,8 @@ function useColorFromPreset() {
 			return;
 		}
 
-		const rgb = new ColorEngine(color);
-		if (!rgb.isColor) {
+		const rgb = parse(color).rgba;
+		if (!rgb) {
 			return;
 		}
 
@@ -54,7 +54,18 @@ function useColorFromPreset() {
 			const designSystem = require(designSystemFile);
 
 			if (designSystem && designSystem.colors) {
-				this.context.colors = designSystem.colors;
+				this.context.colors = Object.keys(designSystem.colors).reduce((obj, key) => {
+					const value = designSystem.colors[key];
+
+					obj[key] = (Array.isArray(value) ? value : [value]).map((clr) => {
+						return parse(clr).rgba;
+					});
+
+					return obj;
+				}, {});
+
+				console.log(this.context.colors);
+
 			}
 
 		} catch (e) {
