@@ -205,5 +205,8 @@
       ]
     }
   },
-  "extraRules": "./rules"
+  "extraRules": "./rules",
+  "autocompletes": [
+  	"./autocompletes/colorsAndFontsFromDS.js"
+  ]
 }

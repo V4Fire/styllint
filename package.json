@@ -1,6 +1,6 @@
 {
   "name": "stlint-v4fire",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "V4Fire Rules for V4Fire",
   "main": "index.js",
   "scripts": {
@@ -20,13 +20,13 @@
   },
   "homepage": "https://github.com/V4Fire/stlint#readme",
   "devDependencies": {
+    "@v4fire/design-system": "git+ssh://git@github.com/V4Fire/DesignSystem.git#master",
     "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "@v4fire/design-system": "ssh://git@github.com:V4Fire/DesignSystem.git#master"
+    "mocha": "^6.2.2"
   },
   "dependencies": {
     "parse-color": "^1.0.0",
-    "stlint": "^1.0.59",
+    "stlint": "^1.0.62",
     "stylus": "^0.54.7"
   },
   "mocha": {
