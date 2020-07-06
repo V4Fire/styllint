@@ -1,37 +1,41 @@
 {
   "name": "stlint-v4fire",
+  "description": "Stlint rules for V4 projects",
+  "homepage": "https://github.com/V4Fire/stlint#readme",
   "version": "1.0.35",
-  "description": "V4Fire Rules for V4Fire",
   "main": "index.js",
+  "license": "MIT",
+  "author": "Chupurnov Valeriy<chupurnov@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V4Fire/stlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/V4Fire/stlint/issues"
+  },
+  "keywords": [
+    "V4Fire",
+    "Stlint"
+  ],
   "scripts": {
     "newversion": "npm test && npm version patch --no-git-tag-version && npm run newversiongit && npm publish ./",
     "newversiongit": "git add --all  && git commit -m \"New version $npm_package_version. Read more https://github.com/stylus/stlint/releases/tag/$npm_package_version \" && git tag $npm_package_version && git push --tags origin dev",
     "test": "mocha tests/**/**.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/V4Fire/stlint.git"
-  },
-  "keywords": [],
-  "author": "Chupurnov Valeriy<chupurnov@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/V4Fire/stlint/issues"
-  },
-  "homepage": "https://github.com/V4Fire/stlint#readme",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "@v4fire/design-system": "ssh://git@github.com:V4Fire/DesignSystem.git#master"
+  "mocha": {
+    "require": [
+      "tests/staff/bootstrap.js"
+    ]
   },
   "dependencies": {
     "parse-color": "^1.0.0",
     "stlint": "^1.0.59",
     "stylus": "^0.54.7"
   },
-  "mocha": {
-    "require": [
-      "tests/staff/bootstrap.js"
-    ]
+  "devDependencies": {
+    "@v4fire/design-system": "^1.23.0",
+    "@v4fire/linters": "^1.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   }
 }
