@@ -1,14 +1,14 @@
 {
-	"rules": {
+  "rules": {
     "replaceWidthHeightToSize": true,
     "testRule": false,
-		"allowColorOnlyInC": true,
+    "allowColorOnlyInC": true,
 
-		"useMixinInsteadUnit": false,
-		"useColorFromPreset": true,
-		"useFontFromDS": true,
+    "useMixinInsteadUnit": false,
+    "useColorFromPreset": true,
+    "useFontFromDS": true,
 
-		"sortOrder": {
+    "sortOrder": {
       "conf": "grouped",
       "startGroupChecking": 6,
       "order": [
