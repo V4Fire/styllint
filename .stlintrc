@@ -171,6 +171,7 @@
           "color",
 
           "filter",
+          "backdrop-filter",
           "background",
           "background-color",
           "background-image",
